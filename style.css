@@ -1,1 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+
+:root {
+  /* BRAND COLORS */
+  --GH-light_grey: #121212;
+  --GH-dark_grey: #121212;
+  --GH-white: #ffffff;
+  --GH-yellow: #ffe500;
+  --GH-cyan: #00fff0;
+  --GH-coral: #ff855f;
+  /* FONT */
+  --GH-font_size_desktop: 12px;
+  /* GAPS - MARGINS */
+  --GH-gap-m: 1rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "DM Mono", monospace, sans-serif;
+}
+
+html {
+  background-color: var(--GH-dark_grey);
+}
+
+p {
+  color: var(--GH-white);
+  font-size: var(--GH-font_size_desktop);
+}
+
+#app {
+  display: flex;
+}

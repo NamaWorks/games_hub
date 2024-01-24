@@ -1,0 +1,20 @@
+section {
+  border: 1px solid red;
+  width: 100%;
+}
+
+#game-hub {
+  flex: 2.5;
+}
+
+#legend {
+  flex: 1;
+}
+
+.section-tab {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: start;
+  gap: var(--GH-gap-m);
+}
