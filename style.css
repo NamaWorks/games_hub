@@ -12,9 +12,11 @@
   --GH-font_size_desktop: 12px;
   /* GAPS - MARGINS */
   --GH-gap-m: 1rem;
+  --GH-margin-l: 5svh;
 }
 
 * {
+  border: 1px solid green;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -25,9 +27,15 @@ html {
   background-color: var(--GH-dark_grey);
 }
 
-p {
+h1 {
+  display: none;
+}
+
+p,
+h2 {
   color: var(--GH-white);
   font-size: var(--GH-font_size_desktop);
+  font-weight: 300;
 }
 
 #app {

@@ -1,10 +1,29 @@
 section {
-  border: 1px solid red;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
 }
 
 #game-hub {
   flex: 2.5;
+}
+
+#conversation-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#conversation-history-container {
+  height: 50%;
+  width: 70%;
+  /* background-color: aquamarine; */
+  align-self: center;
+  margin: var(--GH-margin-);
 }
 
 #legend {
@@ -13,7 +32,7 @@ section {
 
 .section-tab {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   justify-content: start;
   gap: var(--GH-gap-m);
