@@ -3,10 +3,12 @@ section {
   display: flex;
   flex-direction: column;
   height: 100svh;
+  flex-wrap: wrap;
 }
 
 #game-hub {
   flex: 2.5;
+  flex-wrap: nowrap;
 }
 
 #conversation-container {
@@ -24,6 +26,8 @@ section {
   /* background-color: aquamarine; */
   align-self: center;
   margin: var(--GH-margin-);
+  overflow-y: scroll;
+  overflow-x: wrap;
 }
 
 #legend {

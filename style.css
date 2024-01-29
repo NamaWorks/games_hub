@@ -40,4 +40,5 @@ h2 {
 
 #app {
   display: flex;
+  flex-wrap: wrap;
 }

@@ -4,6 +4,7 @@ import { app, gameSection, legendSection } from "../../data/constant-variables";
 import { data } from "../../data/data";
 
 import { getDate } from "../single_functions/get_date";
+import { inputSend } from "../single_functions/input-send";
 
 const printSections = () => {
   // add hidden h1 for SEO reasons
@@ -92,12 +93,16 @@ const printSections = () => {
 const printInputSquare = () => {
   let conversationDiv = document.querySelector("#conversation-container");
   let inputDiv = document.createElement("div");
+  inputDiv.setAttribute("id", "input-container");
   conversationDiv.append(inputDiv);
-  let inputSquareLabel = document.createElement("label");
-  inputDiv.append(inputSquareLabel);
+  // let inputSquareLabel = document.createElement("label");
+  // inputDiv.append(inputSquareLabel);
   let inputSquare = document.createElement("input");
+  inputSquare.setAttribute("id", "input-main");
   inputDiv.append(inputSquare);
-  inputSquare;
+  inputSquare.addEventListener("keydown", function (event) {
+    inputSend(event);
+  });
 };
 
 export const printMainLayout = () => {

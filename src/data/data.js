@@ -22,6 +22,10 @@ export const data = {
           commandName: "change name",
           commandInput: "-cn",
         },
+        cleanCommandLine: {
+          commandName: "clean command line",
+          commandInput: "-cls",
+        },
       },
     },
   },
