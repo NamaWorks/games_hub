@@ -5,6 +5,8 @@ import { data } from "../../data/data";
 
 import { getDate } from "../single_functions/get_date";
 import { inputSend } from "../single_functions/input-send";
+import { createTextLine } from "../single_functions/create-text-line";
+import { printInCommandLine } from "../single_functions/print-in-commandline";
 
 const printSections = () => {
   // add hidden h1 for SEO reasons
@@ -105,7 +107,23 @@ const printInputSquare = () => {
   });
 };
 
+const printWelcome = () => {
+  let welcomeText = data.texts.welcome.welcome01;
+  let welcomeTextLine = createTextLine("games-hub", welcomeText);
+  printInCommandLine(welcomeTextLine);
+
+  let welcomeText2 = data.texts.welcome.welcome02;
+  let welcomeTextLine2 = createTextLine("games-hub", welcomeText2);
+  printInCommandLine(welcomeTextLine2);
+
+  let welcomeText3 = data.texts.welcome.welcome03;
+  let welcomeTextLine3 = createTextLine("games-hub", welcomeText3);
+  printInCommandLine(welcomeTextLine3);
+};
+
 export const printMainLayout = () => {
   printSections();
   printInputSquare();
+
+  printWelcome();
 };
