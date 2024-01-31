@@ -4,7 +4,7 @@ import { app, gameSection, legendSection } from "../../data/constant-variables";
 import { data } from "../../data/data";
 
 import { getDate } from "../single_functions/get_date";
-import { inputSend } from "../single_functions/input-send";
+import { inputSend, setInputValue } from "../single_functions/input-send";
 import { createTextLine } from "../single_functions/create-text-line";
 import { printInCommandLine } from "../single_functions/print-in-commandline";
 
@@ -103,6 +103,9 @@ const printInputSquare = () => {
   inputSquare.setAttribute("id", "input-main");
   inputDiv.append(inputSquare);
   inputSquare.addEventListener("keydown", function (event) {
+    setInputValue(event);
+  });
+  inputSquare.addEventListener("keydown", function (event) {
     inputSend(event);
   });
 };
@@ -124,6 +127,5 @@ const printWelcome = () => {
 export const printMainLayout = () => {
   printSections();
   printInputSquare();
-
   printWelcome();
 };

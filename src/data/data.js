@@ -7,12 +7,8 @@ export const data = {
       pageName: "legend",
       commands: {
         showScores: {
-          commandName: "scores per game",
+          commandName: "scores",
           commandInput: "-sc",
-        },
-        showGamesRules: {
-          commandName: "show games rules",
-          commandInput: "-sgr",
         },
         resetScores: {
           commandName: "reset scores",
@@ -57,8 +53,9 @@ export const data = {
         },
         inGameTexts: {
           inGameText01: "choose an option: rock, paper or scissors",
-          inGameText02: "you win this round",
-          inGameText03: "you lose this round",
+          inGameText02: "you win this round!",
+          inGameText03: "you lose this round!",
+          inGameText04: "draw!",
         },
       },
     },
