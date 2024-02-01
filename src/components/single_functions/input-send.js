@@ -5,6 +5,7 @@ import { cleanCommandLine } from "./clean-command-line";
 import { startRps } from "../games/rock-paper-scissors/start-rps";
 import { rockPaperScissors } from "../games/rock-paper-scissors/rock-paper-scissors";
 import { resetScores } from "./reset-scores";
+import { threeInARow } from "../games/three-in-a-row/three-in-a-row";
 
 export const setInputValue = (event) => {
   if (event.code === "Enter") {
@@ -29,6 +30,7 @@ export const inputSend = (event) => {
         } else if (command === "resetScores") {
           resetScores();
         } else if (command === "changeGameA") {
+          threeInARow();
         } else if (command === "changeGameB") {
           rockPaperScissors();
         } else if (command === "changeGameC") {

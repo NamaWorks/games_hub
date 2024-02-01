@@ -16,7 +16,7 @@ export const data = {
         },
         changeGameA: {
           commandName: "change game - three in a row",
-          commandInput: "-cg-tir",
+          commandInput: "-cg-tiar",
         },
         changeGameB: {
           commandName: "change game - rock, paper, scissors",
@@ -40,6 +40,18 @@ export const data = {
       welcome03: "we have 3 different games (see them in the legend)",
     },
     textsGames: {
+      threeInARow: {
+        welcome: {
+          welcome01: "we are going to play [three in a row]",
+        },
+        rules: {
+          rules01:
+            "the first player in align 3 of their figures, wins the match",
+        },
+        inGameTexts: {
+          inGameText01: "",
+        },
+      },
       rockPaperScissors: {
         welcome: {
           welcome01: "we are going to play [rock, paper, scissors]",
