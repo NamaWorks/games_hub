@@ -7,7 +7,7 @@ export const showGameRulesTiar = () => {
     "games-hub",
     data.texts.textsGames.threeInARow.welcome.welcome01
   );
-  console.log(data.texts.textsGames.threeInARow.welcome.welcome01);
+  // console.log(data.texts.textsGames.threeInARow.welcome.welcome01);
   let rulesLine = createTextLine(
     "games-hub",
     data.texts.textsGames.threeInARow.rules.rules01

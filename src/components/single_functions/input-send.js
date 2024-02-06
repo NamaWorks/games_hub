@@ -2,7 +2,6 @@ import { createTextLine } from "./create-text-line";
 import { printInCommandLine } from "./print-in-commandline";
 import { data } from "../../data/data";
 import { cleanCommandLine } from "./clean-command-line";
-import { startRps } from "../games/rock-paper-scissors/start-rps";
 import { rockPaperScissors } from "../games/rock-paper-scissors/rock-paper-scissors";
 import { resetScores } from "./reset-scores";
 import { threeInARow } from "../games/three-in-a-row/three-in-a-row";

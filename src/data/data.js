@@ -46,10 +46,10 @@ export const data = {
         },
         rules: {
           rules01:
-            "the first player in align 3 of their figures, wins the match",
+            "the first player that aligns 3 of their figures, wins the match",
         },
         inGameTexts: {
-          inGameText01: "",
+          inGameText01: "who do you want to be the first? [x] or [o]",
         },
       },
       rockPaperScissors: {
