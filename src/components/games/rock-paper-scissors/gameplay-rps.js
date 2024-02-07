@@ -4,6 +4,7 @@ import { data } from "../../../data/data";
 import { createTextLine } from "../../single_functions/create-text-line";
 import { printInCommandLine } from "../../single_functions/print-in-commandline";
 import { inputSend } from "../../single_functions/input-send";
+import { endGameMessage } from "../../single_functions/general-messages";
 
 let machineChoice;
 let inGameText01 =
@@ -39,6 +40,8 @@ const eventListenerRps = (event) => {
       let drawTextRps = createTextLine("games-hub", inGameTextDraw);
       printInCommandLine(drawTextRps);
       removeEventListenerFromInputRps();
+            removeEventListenerFromInputRps();
+      endGameMessage()
     } else if (inputMainValue === "rock") {
       if (machineChoice === "paper") {
         let machineChoiceAnnounce = createTextLine(
@@ -57,6 +60,8 @@ const eventListenerRps = (event) => {
         let winTextRps = createTextLine("games-hub", inGameTextWin);
         printInCommandLine(winTextRps);
       }
+            removeEventListenerFromInputRps();
+      endGameMessage()
     } else if (inputMainValue === "paper") {
       if (machineChoice === "scissors") {
         let machineChoiceAnnounce = createTextLine(
@@ -75,6 +80,8 @@ const eventListenerRps = (event) => {
         let winTextRps = createTextLine("games-hub", inGameTextWin);
         printInCommandLine(winTextRps);
       }
+            removeEventListenerFromInputRps();
+      endGameMessage()
     } else if (inputMainValue === "scissors") {
       if (machineChoice === "rock") {
         let machineChoiceAnnounce = createTextLine(
@@ -93,6 +100,11 @@ const eventListenerRps = (event) => {
         let winTextRps = createTextLine("games-hub", inGameTextWin);
         printInCommandLine(winTextRps);
       }
+            removeEventListenerFromInputRps();
+      endGameMessage()
+    } else { 
+      let notValidAnswer = createTextLine("games-hub", `that's not a valid answer`)
+      printInCommandLine(notValidAnswer)
     }
   }
 };

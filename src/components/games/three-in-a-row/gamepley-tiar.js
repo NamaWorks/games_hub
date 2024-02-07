@@ -1,12 +1,11 @@
+import { playerChoiceTiar } from "./player-selection-turns-tiar";
 import { printGridTiar } from "./print-grid-tiar";
-import { turnTiar } from "./who-starts-tiar";
 
 // export let lastPlayerTiar;
 
 export const gameplayTiar = () => {
   sessionStorage.setItem("lastPlayerTiar", "");
-  // función de elegir quién comienza, si jugador 01 o jugador 02
-  turnTiar();
+  playerChoiceTiar()
   // función de presentar la cuadrícula
   // función de presentar las opciones disponibles para poner la nueva ficha
   // función de pintar la nueva cuadrícula
