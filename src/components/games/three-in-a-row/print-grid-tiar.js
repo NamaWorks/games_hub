@@ -12,7 +12,7 @@ export const printGridTiar = () => {
   let gridRow01 = gridTiar.row01;
   let gridRow02 = gridTiar.row02;
   let gridRow03 = gridTiar.row03;
-  console.log(gridTiar);
+  // console.log(gridTiar);
   let grid = createGridLine();
   printInCommandLine(grid);
 };
