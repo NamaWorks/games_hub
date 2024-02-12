@@ -8,11 +8,14 @@ let lastPlayerTiar = sessionStorage.getItem("lastPlayerTiar");
 let firstPlayerSelected = false;
 let turnPlayer;
 let roundsCounter = 0;
+let availablePositions = [];
+let checkedTiar = 0
 
 
 
 export const playerChoiceTiar = () => {
   firstPlayerSelected = false;
+  checkedTiar = 0;
 
     let whoStartsTiarText01 = createTextLine("games-hub", data.texts.textsGames.threeInARow.inGameTexts.inGameText01);
     printInCommandLine(whoStartsTiarText01);
@@ -53,11 +56,11 @@ let getStartingPlayer = (event) => {
       }
 
     }
-    console.log(`the player for this turn is: ` + turnPlayer)
+    // console.log(`the player for this turn is: ` + turnPlayer)
   }
 };
 
-//  AHORA TENEMOS QUE PREPARAR LAS FUNCIONES PARA LOS TURNOS Y CÓMO ESTOS SE VAN A DESARROLLAR
+//? TURNS FUNCTIONS
 const turnsTiar = () => {
 if (roundsCounter <= 9) {
   if(turnPlayer == "x") {
@@ -71,13 +74,12 @@ if (roundsCounter <= 9) {
 }
 
 const userTurn = () => {
-  printGridTiar()
+  // console.log(gridTiar)
+  // printGridTiar()
   let availableOptions = getAvailablePositionsTiar()
   printAvailableOptions(availableOptions)
   const inputMain = document.querySelector("#input-main");
-  inputMain.addEventListener("keydown", function addWriteSelectedOption (event) {writeSelectedOption(event);});
-  // PENDING TO PREPARE THE CHECKER FUNCTION
-  // threeInARowChecker()
+  inputMain.addEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
 
   roundsCounter++
 }
@@ -89,25 +91,34 @@ const machineTurn = () => {
   let chosenOptionArr = chosenOption.split(" ")
   let rowName = chosenOptionArr[0]
   let columnNumber = getSelectedColumnNumber(chosenOption)
+  let machineTurnText = createTextLine("games-hub", `now is the turn for the machine`)
+  printInCommandLine(machineTurnText)
   modifyGridTiar(rowName, columnNumber, "o")
+
+  
+  tiarChecker()
   roundsCounter++
   changeTurnPlayer()
 }
 
-
-let availablePositions = [];
+//? AVAILABLE OPTIONS
 const getAvailablePositionsTiar = () => {
-  
-  // console.log(gridTiar)
+  availablePositions=[]
   for (const row in gridTiar) {
     let rowContent = gridTiar[row];
     let positionAcc = 0
+    console.log(`the rowContent:`)
+    console.log(rowContent)
     rowContent.forEach(item => {
       positionAcc ++
+      console.log(`the item is = ${item}`)
+      if(item = "-"){
       
       let availablePosition = row + " " + "column0" +  positionAcc
       
       availablePositions.push(availablePosition)
+      console.log(availablePositions)
+    } else {}
       
     });
     
@@ -133,7 +144,7 @@ const getSelectedColumnNumber = (string) => {
   return columnNumber
 }
 
-const writeSelectedOption = (event) => {
+const writeSelectedOptionUser = (event) => {
   if(event.code == "Enter"){
     const inputMain = document.querySelector("#input-main");
     if(availablePositions.includes(inputMain.value)){
@@ -141,8 +152,10 @@ const writeSelectedOption = (event) => {
       let arrayInputMainValue = inputMainValue.split(" ")
       let columnNumber = getSelectedColumnNumber(arrayInputMainValue[1])
       let row = arrayInputMainValue[0]
-      console.log(`column number = ` + columnNumber)
       modifyGridTiar(row , columnNumber, "x")
+
+      tiarChecker()
+
       changeTurnPlayer()
     } else {
       let notvalidOptionText = createTextLine("games-hub", `that's not a valid option, try using one of the listed above` )
@@ -151,18 +164,44 @@ const writeSelectedOption = (event) => {
   } 
 }
 
+//? MODIFY GRID WITH SELECTION
 const modifyGridTiar = (rowName , columnNumber , icon) => {
-  let column = columnNumber - 1
+  let column = columnNumber -1 
   // console.log(column)
   gridTiar[rowName][column] = icon
   // console.log(gridTiar)
   printGridTiar()
 }
 
+//? CHANGE PLAYER FOR NEXT TURN
 const changeTurnPlayer = () => {
   if(turnPlayer == "x"){
     turnPlayer = "o"
+    turnsTiar()
   } else if (turnPlayer == "o" ){
     turnPlayer = "x"
+    turnsTiar()
   }
+}
+
+//! GRID CHECKER FUNCTION
+const tiarChecker =  (icon) => {
+  if(icon == "x" || icon == "o"){
+  // console.log(gridTiar.row01)
+   if(gridTiar.row01 = [icon, icon, icon]){
+    endGameTiar()
+   } else if (gridTiar.row02 = [icon, icon, icon]){
+    endGameTiar()
+   } else if (gridTiar.row03 = [icon, icon, icon]){
+    endGameTiar()
+   } else if (gridTiar.row01[0] == icon && gridTiar.row02[1] == icon && gridTiar.row03[2] == icon) {
+    endGameTiar()
+   } else if (gridTiar.row01[2] == icon && gridTiar.row02[1] == icon && gridTiar.row03[0] == icon) {
+    endGameTiar()
+   }
+  }
+}
+
+const endGameTiar = () => {
+console.log(`the game ends here`)
 }

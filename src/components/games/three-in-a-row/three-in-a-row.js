@@ -8,5 +8,4 @@ export const threeInARow = () => {
   showGameRulesTiar();
   resetGridTiar();
   gameplayTiar();
-  // printGridTiar();
 };
