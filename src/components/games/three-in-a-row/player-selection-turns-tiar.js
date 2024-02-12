@@ -74,8 +74,6 @@ if (roundsCounter <= 9) {
 }
 
 const userTurn = () => {
-  // console.log(gridTiar)
-  // printGridTiar()
   let availableOptions = getAvailablePositionsTiar()
   printAvailableOptions(availableOptions)
   const inputMain = document.querySelector("#input-main");
