@@ -9,13 +9,11 @@ let firstPlayerSelected = false;
 let turnPlayer;
 let roundsCounter = 0;
 let availablePositions = [];
-let checkedTiar = 0
 
 
 
 export const playerChoiceTiar = () => {
   firstPlayerSelected = false;
-  checkedTiar = 0;
 
     let whoStartsTiarText01 = createTextLine("games-hub", data.texts.textsGames.threeInARow.inGameTexts.inGameText01);
     printInCommandLine(whoStartsTiarText01);
@@ -74,6 +72,9 @@ if (roundsCounter <= 9) {
 }
 
 const userTurn = () => {
+let startUserTurn = createTextLine("user", `now it's the user's turn`)
+printInCommandLine(startUserTurn)
+
   let availableOptions = getAvailablePositionsTiar()
   printAvailableOptions(availableOptions)
   const inputMain = document.querySelector("#input-main");
@@ -83,9 +84,17 @@ const userTurn = () => {
 }
 
 const machineTurn = () => {
-  let randomInteger = getRandomInteger(0,8)
+  if(roundsCounter > 0){
+    const inputMain = document.querySelector("#input-main");
+    inputMain.removeEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
+  }
   let availableOptions = getAvailablePositionsTiar()
+  console.log(`availableOptions lengt: ` + availableOptions.length)
+  let randomInteger = getRandomInteger(0,availableOptions.length - 1)
+  console.log(`the random integer is : ${randomInteger}`)
+  console.log(`the available options are: ` + availableOptions);
   let chosenOption = availableOptions[randomInteger]
+  console.log(`this is the chosenOption: ` + chosenOption)
   let chosenOptionArr = chosenOption.split(" ")
   let rowName = chosenOptionArr[0]
   let columnNumber = getSelectedColumnNumber(chosenOption)
@@ -94,7 +103,7 @@ const machineTurn = () => {
   modifyGridTiar(rowName, columnNumber, "o")
 
   
-  tiarChecker()
+  tiarChecker(lastPlayerTiar)
   roundsCounter++
   changeTurnPlayer()
 }
@@ -105,17 +114,16 @@ const getAvailablePositionsTiar = () => {
   for (const row in gridTiar) {
     let rowContent = gridTiar[row];
     let positionAcc = 0
-    console.log(`the rowContent:`)
-    console.log(rowContent)
+    // console.log(`the rowContent:`)
+    // console.log(rowContent)
     rowContent.forEach(item => {
       positionAcc ++
-      console.log(`the item is = ${item}`)
-      if(item = "-"){
-      
+      if(item === "-"){
+        // console.log(`the item is = ${item}`)
       let availablePosition = row + " " + "column0" +  positionAcc
       
       availablePositions.push(availablePosition)
-      console.log(availablePositions)
+      // console.log(availablePositions)
     } else {}
       
     });
@@ -152,12 +160,15 @@ const writeSelectedOptionUser = (event) => {
       let row = arrayInputMainValue[0]
       modifyGridTiar(row , columnNumber, "x")
 
-      tiarChecker()
+      tiarChecker(lastPlayerTiar)
 
       changeTurnPlayer()
     } else {
-      let notvalidOptionText = createTextLine("games-hub", `that's not a valid option, try using one of the listed above` )
-      printInCommandLine(notvalidOptionText)
+      // setTimeout(() => {
+      //   console.log(`not valid option given: ` + inputMain.value)
+      //   let notvalidOptionText = createTextLine("games-hub", `that's not a valid option, try using one of the listed above` )
+      //   printInCommandLine(notvalidOptionText)
+      // }, 1000);
     }
   } 
 }
