@@ -5,6 +5,8 @@ import { cleanCommandLine } from "./clean-command-line";
 import { rockPaperScissors } from "../games/rock-paper-scissors/rock-paper-scissors";
 import { resetScores } from "./reset-scores";
 import { threeInARow } from "../games/three-in-a-row/three-in-a-row";
+import { hangMan } from "../games/hangman/hang-man";
+
 
 export const setInputValue = (event) => {
   if (event.code === "Enter") {
@@ -33,6 +35,7 @@ export const inputSend = (event) => {
         } else if (command === "changeGameB") {
           rockPaperScissors();
         } else if (command === "changeGameC") {
+          hangMan()
         } else if (command === "cleanCommandLine") {
           cleanCommandLine();
         }

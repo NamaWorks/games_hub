@@ -12,6 +12,7 @@ let availablePositions = [];
 
 
 
+
 export const playerChoiceTiar = () => {
   firstPlayerSelected = false;
 
@@ -62,18 +63,22 @@ let getStartingPlayer = (event) => {
 const turnsTiar = () => {
 if (roundsCounter <= 9) {
   if(turnPlayer == "x") {
-    // console.log ("no hay rondas jugadas")
     userTurn()
+    sessionStorage.setItem("lastPlayerTiar", "x")
   } if (turnPlayer == "o") {
     machineTurn()
-    // console.log('Hay rondas jugadas')
+    sessionStorage.setItem("lastPlayerTiar", "o")
   }
+} else if (roundsCounter = 9) {
+  endGameTiar()
 }
 }
 
 const userTurn = () => {
 let startUserTurn = createTextLine("user", `now it's the user's turn`)
 printInCommandLine(startUserTurn)
+
+    printGridTiar()
 
   let availableOptions = getAvailablePositionsTiar()
   printAvailableOptions(availableOptions)
@@ -89,12 +94,8 @@ const machineTurn = () => {
     inputMain.removeEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
   }
   let availableOptions = getAvailablePositionsTiar()
-  console.log(`availableOptions lengt: ` + availableOptions.length)
   let randomInteger = getRandomInteger(0,availableOptions.length - 1)
-  console.log(`the random integer is : ${randomInteger}`)
-  console.log(`the available options are: ` + availableOptions);
   let chosenOption = availableOptions[randomInteger]
-  console.log(`this is the chosenOption: ` + chosenOption)
   let chosenOptionArr = chosenOption.split(" ")
   let rowName = chosenOptionArr[0]
   let columnNumber = getSelectedColumnNumber(chosenOption)
@@ -102,10 +103,15 @@ const machineTurn = () => {
   printInCommandLine(machineTurnText)
   modifyGridTiar(rowName, columnNumber, "o")
 
+
+  let tiarCheckerTurn = tiarChecker("o")
+  // console.log(tiarCheckerTurn)
+
+  if (!tiarCheckerTurn) {
+    changeTurnPlayer()
+  }
   
-  tiarChecker(lastPlayerTiar)
   roundsCounter++
-  changeTurnPlayer()
 }
 
 //? AVAILABLE OPTIONS
@@ -160,9 +166,12 @@ const writeSelectedOptionUser = (event) => {
       let row = arrayInputMainValue[0]
       modifyGridTiar(row , columnNumber, "x")
 
-      tiarChecker(lastPlayerTiar)
+      let tiarCheckerTurn = tiarChecker("x")
+      // console.log(tiarCheckerTurn)
 
-      changeTurnPlayer()
+      if (!tiarCheckerTurn) {
+        changeTurnPlayer()
+      }
     } else {
       // setTimeout(() => {
       //   console.log(`not valid option given: ` + inputMain.value)
@@ -194,23 +203,24 @@ const changeTurnPlayer = () => {
 }
 
 //! GRID CHECKER FUNCTION
+
 const tiarChecker =  (icon) => {
-  if(icon == "x" || icon == "o"){
-  // console.log(gridTiar.row01)
-   if(gridTiar.row01 = [icon, icon, icon]){
-    endGameTiar()
-   } else if (gridTiar.row02 = [icon, icon, icon]){
-    endGameTiar()
-   } else if (gridTiar.row03 = [icon, icon, icon]){
-    endGameTiar()
-   } else if (gridTiar.row01[0] == icon && gridTiar.row02[1] == icon && gridTiar.row03[2] == icon) {
-    endGameTiar()
-   } else if (gridTiar.row01[2] == icon && gridTiar.row02[1] == icon && gridTiar.row03[0] == icon) {
-    endGameTiar()
-   }
-  }
+  if(icon == "x"){
+//! check horizontal liness
+console.log(gridTiar)
+// we iterate all the rows
+for (const row in gridTiar) {
+
+}
+}
 }
 
-const endGameTiar = () => {
-console.log(`the game ends here`)
+// Prepare a clean command line function in order to show the final grid and the winner message
+const endGameTiar = (player) => {
+console.log(`the winner is: ${player}`)
+  console.log(`the game ends here`)
+}
+
+const drawGameTiar = () => {
+
 }

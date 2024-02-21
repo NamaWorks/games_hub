@@ -23,8 +23,8 @@ export const data = {
           commandInput: "-cg-rps",
         },
         changeGameC: {
-          commandName: "change game - writing game",
-          commandInput: "-cg-wg",
+          commandName: "change game - hangman",
+          commandInput: "-cg-hm",
         },
         cleanCommandLine: {
           commandName: "clean command line",
@@ -70,6 +70,14 @@ export const data = {
           inGameText04: "draw!",
         },
       },
+      hangMan: {
+        welcome: {
+          welcome01: "we are going to play [hang man]",
+        },
+        inGameTexts: {
+          wordsToGuess: ['potato', 'mobile', 'lego', 'jacket', 'apple', 'cat', 'throne', 'street',],
+        },
+      }
     },
   },
 };
