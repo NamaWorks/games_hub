@@ -3,7 +3,7 @@
 :root {
   /* BRAND COLORS */
   --GH-light_grey: #121212;
-  --GH-dark_grey: #121212;
+  --GH-dark_grey: #0E0E0E;
   --GH-white: #ffffff;
   --GH-yellow: #ffe500;
   --GH-cyan: #00fff0;
@@ -11,21 +11,21 @@
   /* FONT */
   --GH-font_size_desktop: 12px;
   /* GAPS - MARGINS */
+  --GH-gap-s: 0.5rem;
   --GH-gap-m: 1rem;
+  --GH-gap-l: 2rem;
   --GH-margin-l: 5svh;
 }
 
 * {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "DM Mono", monospace, sans-serif;
 }
 
-html {
-  background-color: var(--GH-dark_grey);
-}
+
 
 h1 {
   display: none;
@@ -38,7 +38,4 @@ h2 {
   font-weight: 300;
 }
 
-#app {
-  display: flex;
-  flex-wrap: wrap;
-}
+

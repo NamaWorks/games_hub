@@ -39,3 +39,64 @@ section {
   justify-content: start;
   gap: var(--GH-gap-m);
 }
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--GH-gap-s);
+  margin: var(--GH-margin-l);
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+#input-main {
+  width: 50svw;
+  margin: var(--GH-margin-l);
+  background-color: var(--GH-dark_grey);
+  border: 1px solid var(--GH-yellow);
+  color: var(--GH-coral);
+  padding: var(--GH-gap-m);
+}
+
+#app {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--GH-dark_grey);
+}
+
+#conversation-container {
+  background-color: var(--GH-light_grey);
+}
+
+.section-tab {
+  border: 1px solid var(--GH-yellow);
+  margin: 0;
+  padding: 0;
+  min-height: 6svh;
+  max-height: 6svh;
+  padding: var(--GH-gap-l);
+}
+
+#legend{
+  border: 1px solid var(--GH-yellow);
+}
+
+.command-input {
+  color: var(--GH-yellow);
+}
+
+#legend-content {
+  padding: var(--GH-gap-m);
+}
+
+.games-hub-input {
+  color: var(--GH-yellow);
+}
+.user-input {
+  color: var(--GH-coral);
+}

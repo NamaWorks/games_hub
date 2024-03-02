@@ -205,14 +205,12 @@ const changeTurnPlayer = () => {
 //! GRID CHECKER FUNCTION
 
 const tiarChecker =  (icon) => {
-  if(icon == "x"){
-//! check horizontal liness
 console.log(gridTiar)
 // we iterate all the rows
 for (const row in gridTiar) {
+  // console.log(gridTiar)
+}
 
-}
-}
 }
 
 // Prepare a clean command line function in order to show the final grid and the winner message
