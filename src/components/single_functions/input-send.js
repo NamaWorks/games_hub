@@ -6,6 +6,7 @@ import { rockPaperScissors } from "../games/rock-paper-scissors/rock-paper-sciss
 import { resetScores } from "./reset-scores";
 import { threeInARow } from "../games/three-in-a-row/three-in-a-row";
 import { hangMan } from "../games/hangman/hang-man";
+import { showScores } from "./scores";
 
 
 export const setInputValue = (event) => {

@@ -10,6 +10,9 @@ let turnPlayer;
 let roundsCounter = 0;
 let availablePositions = [];
 
+localStorage.setItem("tiarRoundsPlayed", 0)
+localStorage.setItem("tiarRoundsWon", 0)
+
 
 
 
@@ -55,7 +58,6 @@ let getStartingPlayer = (event) => {
       }
 
     }
-    // console.log(`the player for this turn is: ` + turnPlayer)
   }
 };
 
@@ -85,6 +87,12 @@ printInCommandLine(startUserTurn)
   const inputMain = document.querySelector("#input-main");
   inputMain.addEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
 
+
+  let checkedTiar = tiarChecker()
+if (checkedTiar) {
+  endGameTiar("[x]")
+} else {drawGameTiarChecker()}
+
   roundsCounter++
 }
 
@@ -104,14 +112,14 @@ const machineTurn = () => {
   modifyGridTiar(rowName, columnNumber, "o")
 
 
-  let tiarCheckerTurn = tiarChecker("o")
-  // console.log(tiarCheckerTurn)
-
-  if (!tiarCheckerTurn) {
-    changeTurnPlayer()
-  }
+let checkedTiar = tiarChecker()
+if (checkedTiar) {
+  endGameTiar("[o]")
+} else {drawGameTiarChecker()}
   
   roundsCounter++
+
+  changeTurnPlayer()
 }
 
 //? AVAILABLE OPTIONS
@@ -120,16 +128,12 @@ const getAvailablePositionsTiar = () => {
   for (const row in gridTiar) {
     let rowContent = gridTiar[row];
     let positionAcc = 0
-    // console.log(`the rowContent:`)
-    // console.log(rowContent)
     rowContent.forEach(item => {
       positionAcc ++
       if(item === "-"){
-        // console.log(`the item is = ${item}`)
       let availablePosition = row + " " + "column0" +  positionAcc
       
       availablePositions.push(availablePosition)
-      // console.log(availablePositions)
     } else {}
       
     });
@@ -166,28 +170,19 @@ const writeSelectedOptionUser = (event) => {
       let row = arrayInputMainValue[0]
       modifyGridTiar(row , columnNumber, "x")
 
-      let tiarCheckerTurn = tiarChecker("x")
-      // console.log(tiarCheckerTurn)
+  let checkedTiar = tiarChecker()
+  if(!checkedTiar){
+  	changeTurnPlayer()
+  }
 
-      if (!tiarCheckerTurn) {
-        changeTurnPlayer()
-      }
-    } else {
-      // setTimeout(() => {
-      //   console.log(`not valid option given: ` + inputMain.value)
-      //   let notvalidOptionText = createTextLine("games-hub", `that's not a valid option, try using one of the listed above` )
-      //   printInCommandLine(notvalidOptionText)
-      // }, 1000);
-    }
   } 
+}
 }
 
 //? MODIFY GRID WITH SELECTION
 const modifyGridTiar = (rowName , columnNumber , icon) => {
   let column = columnNumber -1 
-  // console.log(column)
   gridTiar[rowName][column] = icon
-  // console.log(gridTiar)
   printGridTiar()
 }
 
@@ -204,13 +199,58 @@ const changeTurnPlayer = () => {
 
 //! GRID CHECKER FUNCTION
 
-const tiarChecker =  (icon) => {
-console.log(gridTiar)
-// we iterate all the rows
-for (const row in gridTiar) {
-  // console.log(gridTiar)
+const tiarChecker =  () => {
+// Check rows
+let hasWinningRow = checkWinningRows(gridTiar)
+let hasWinningColumn = checkWinningColumns(gridTiar)
+let hasWinningDiagonals = checkWinningDiagonals(gridTiar)
+
+if (hasWinningColumn || hasWinningDiagonals || hasWinningRow) {
+  return true
+} else false
+
 }
 
+function checkWinningRows(grid) {
+  // Iterate through each row
+  for (const rowKey in grid) {
+    const row = grid[rowKey];
+    if (row[0] === row[1] && row[1] === row[2] && row[0] !== "-") {
+      // Found a winning row with identical icons
+      return true;
+    }
+  }
+  // No winning rows found
+  return false;
+}
+
+function checkWinningColumns(grid) {
+  // Transpose the grid to create a new grid with columns as rows
+  const transposedGrid = Object.keys(grid).map((rowKey) => grid[rowKey]);
+
+  // Use the same logic as checking rows
+  return checkWinningRows(transposedGrid);
+}
+
+function checkWinningDiagonals(grid) {
+  // Check forward diagonal (top-left to bottom-right)
+  const forwardDiagonal = [grid.row01[0], grid.row02[1], grid.row03[2]];
+  if (areAllElementsEqual(forwardDiagonal)) {
+    return true;
+  }
+
+  // Check backward diagonal (top-right to bottom-left)
+  const backwardDiagonal = [grid.row01[2], grid.row02[1], grid.row03[0]];
+  if (areAllElementsEqual(backwardDiagonal)) {
+    return true;
+  }
+
+  return false;
+}
+
+// Helper function to check if all elements in an array are equal
+function areAllElementsEqual(arr) {
+  return arr.every((element) => element !== "-" && element === arr[0]);
 }
 
 // Prepare a clean command line function in order to show the final grid and the winner message
@@ -219,6 +259,6 @@ console.log(`the winner is: ${player}`)
   console.log(`the game ends here`)
 }
 
-const drawGameTiar = () => {
-
+const drawGameTiarChecker = () => {
+  
 }

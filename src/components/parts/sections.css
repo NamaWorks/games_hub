@@ -28,9 +28,6 @@ section {
   overflow-x: wrap;
 }
 
-#legend {
-  flex: 1;
-}
 
 .section-tab {
   display: flex;
@@ -39,6 +36,17 @@ section {
   justify-content: start;
   gap: var(--GH-gap-m);
 }
+
+#game-hub-tab{
+  border-top: none;
+  border-left: none;
+}
+#legend-tab{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
 
 ul {
   display: flex;
@@ -74,7 +82,7 @@ li {
 }
 
 .section-tab {
-  border: 1px solid var(--GH-yellow);
+  border: 0.25px solid var(--GH-yellow);
   margin: 0;
   padding: 0;
   min-height: 6svh;
@@ -84,6 +92,10 @@ li {
 
 #legend{
   border: 1px solid var(--GH-yellow);
+  flex: 1;
+border-top: none;
+border-right: none;
+border-bottom: none;
 }
 
 .command-input {
@@ -99,4 +111,8 @@ li {
 }
 .user-input {
   color: var(--GH-coral);
+}
+
+.blue {
+  color: var(--GH-cyan);
 }

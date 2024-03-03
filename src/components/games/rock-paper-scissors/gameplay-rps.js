@@ -16,6 +16,8 @@ let inGameTextLose =
 let inGameTextDraw =
   data.texts.textsGames.rockPaperScissors.inGameTexts.inGameText04;
 
+localStorage.setItem("rpsRoundsWon", 0)
+
 export const machineSideRps = () => {
   let lastInputValue = getLastInputValue();
   // console.log(lastInputValue);
@@ -28,6 +30,9 @@ export const machineSideRps = () => {
 };
 
 const eventListenerRps = (event) => {
+
+  let  rpsRoundsWon = Number(localStorage.getItem("rpsRoundsWon"))
+
   if (event.code === "Enter") {
     let inputMain = document.querySelector("#input-main");
     let inputMainValue = inputMain.value;
@@ -59,6 +64,10 @@ const eventListenerRps = (event) => {
         printInCommandLine(machineChoiceAnnounce);
         let winTextRps = createTextLine("games-hub", inGameTextWin);
         printInCommandLine(winTextRps);
+
+          let modifiedRpsRoundsWon = rpsRoundsWon + 1
+          localStorage.setItem("rpsRoundsWon", modifiedRpsRoundsWon)
+
       }
             removeEventListenerFromInputRps();
       endGameMessage()
@@ -79,6 +88,10 @@ const eventListenerRps = (event) => {
         printInCommandLine(machineChoiceAnnounce);
         let winTextRps = createTextLine("games-hub", inGameTextWin);
         printInCommandLine(winTextRps);
+
+          let modifiedRpsRoundsWon = rpsRoundsWon + 1
+          localStorage.setItem("rpsRoundsWon", modifiedRpsRoundsWon)
+
       }
             removeEventListenerFromInputRps();
       endGameMessage()
@@ -99,6 +112,10 @@ const eventListenerRps = (event) => {
         printInCommandLine(machineChoiceAnnounce);
         let winTextRps = createTextLine("games-hub", inGameTextWin);
         printInCommandLine(winTextRps);
+
+          let modifiedRpsRoundsWon = rpsRoundsWon + 1
+          localStorage.setItem("rpsRoundsWon", modifiedRpsRoundsWon)
+
       }
             removeEventListenerFromInputRps();
       endGameMessage()
