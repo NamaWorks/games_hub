@@ -11,8 +11,8 @@ sessionStorage.setItem("selectedWord", "")
 sessionStorage.setItem("selectedWordArr", "")
 sessionStorage.setItem("dashesWord", "")
 sessionStorage.setItem("triesLeftHm", 6)
-localStorage.setItem("hangManRoundsPlayed", 0)
-localStorage.setItem("hangManRoundsWon", 0)
+// localStorage.setItem("hangManRoundsPlayed", 0)
+// localStorage.setItem("hangManRoundsWon", 0)
 
 export const getRandomWord = () => {
 let hmRoundsPlayed = Number(localStorage.getItem("hangManRoundsPlayed"))

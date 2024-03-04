@@ -3,21 +3,24 @@ import { data } from "../../../data/data";
 import { printInCommandLine } from "../../single_functions/print-in-commandline";
 import { gridTiar, printGridTiar } from "./print-grid-tiar";
 import { getRandomInteger } from "../../single_functions/get-random-integer";
+import { endGameMessage } from "../../single_functions/general-messages";
 
 let lastPlayerTiar = sessionStorage.getItem("lastPlayerTiar");
 let firstPlayerSelected = false;
 let turnPlayer;
 let roundsCounter = 0;
 let availablePositions = [];
+// let roundWinner = ""
 
-localStorage.setItem("tiarRoundsPlayed", 0)
-localStorage.setItem("tiarRoundsWon", 0)
-
-
+// localStorage.setItem("tiarRoundsPlayed", "")
+// localStorage.setItem("tiarRoundsWon", "")
 
 
 export const playerChoiceTiar = () => {
   firstPlayerSelected = false;
+  let roundsPlayed = Number(localStorage.getItem("tiarRoundsPlayed"))
+  let modifiedRoundsPlayed = roundsPlayed +1
+  localStorage.setItem("tiarRoundsPlayed", modifiedRoundsPlayed)
 
     let whoStartsTiarText01 = createTextLine("games-hub", data.texts.textsGames.threeInARow.inGameTexts.inGameText01);
     printInCommandLine(whoStartsTiarText01);
@@ -28,6 +31,7 @@ export const playerChoiceTiar = () => {
 
 let getStartingPlayer = (event) => {
   const inputMain = document.querySelector("#input-main");
+
   if (event.code === "Enter"){
 
     if(!firstPlayerSelected){
@@ -72,29 +76,32 @@ if (roundsCounter <= 9) {
     sessionStorage.setItem("lastPlayerTiar", "o")
   }
 } else if (roundsCounter = 9) {
-  endGameTiar()
+ drawGameTiarChecker()
 }
 }
 
+let isEventAdded = false
 const userTurn = () => {
 let startUserTurn = createTextLine("user", `now it's the user's turn`)
 printInCommandLine(startUserTurn)
 
     printGridTiar()
+    console.log(`printGridTiar userTurn`)
 
   let availableOptions = getAvailablePositionsTiar()
   printAvailableOptions(availableOptions)
+
   const inputMain = document.querySelector("#input-main");
-  inputMain.addEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
 
-
-  let checkedTiar = tiarChecker()
-if (checkedTiar) {
-  endGameTiar("[x]")
-} else {drawGameTiarChecker()}
+  if(!isEventAdded){
+    console.log(`event listener added`)
+    inputMain.addEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
+    isEventAdded = true
+  }
 
   roundsCounter++
 }
+
 
 const machineTurn = () => {
   if(roundsCounter > 0){
@@ -111,15 +118,10 @@ const machineTurn = () => {
   printInCommandLine(machineTurnText)
   modifyGridTiar(rowName, columnNumber, "o")
 
+  if (tiarChecker() == true) {endGameTiar(turnPlayer)} else{changeTurnPlayer()}
 
-let checkedTiar = tiarChecker()
-if (checkedTiar) {
-  endGameTiar("[o]")
-} else {drawGameTiarChecker()}
   
   roundsCounter++
-
-  changeTurnPlayer()
 }
 
 //? AVAILABLE OPTIONS
@@ -163,6 +165,7 @@ const getSelectedColumnNumber = (string) => {
 const writeSelectedOptionUser = (event) => {
   if(event.code == "Enter"){
     const inputMain = document.querySelector("#input-main");
+     console.log(inputMain.value)
     if(availablePositions.includes(inputMain.value)){
       let inputMainValue = inputMain.value
       let arrayInputMainValue = inputMainValue.split(" ")
@@ -170,12 +173,12 @@ const writeSelectedOptionUser = (event) => {
       let row = arrayInputMainValue[0]
       modifyGridTiar(row , columnNumber, "x")
 
-  let checkedTiar = tiarChecker()
-  if(!checkedTiar){
-  	changeTurnPlayer()
-  }
 
-  } 
+      if (tiarChecker() == true) {
+        endGameTiar(turnPlayer)} else {changeTurnPlayer()
+        }
+      } 
+      inputMain.removeEventListener("keydown", function addWriteSelectedOptionUser (event) {writeSelectedOptionUser(event);});
 }
 }
 
@@ -184,6 +187,7 @@ const modifyGridTiar = (rowName , columnNumber , icon) => {
   let column = columnNumber -1 
   gridTiar[rowName][column] = icon
   printGridTiar()
+  console.log(`printGridTiar modifyGridTiar`)
 }
 
 //? CHANGE PLAYER FOR NEXT TURN
@@ -201,13 +205,22 @@ const changeTurnPlayer = () => {
 
 const tiarChecker =  () => {
 // Check rows
+
 let hasWinningRow = checkWinningRows(gridTiar)
 let hasWinningColumn = checkWinningColumns(gridTiar)
 let hasWinningDiagonals = checkWinningDiagonals(gridTiar)
 
-if (hasWinningColumn || hasWinningDiagonals || hasWinningRow) {
+let tiarRoundsWon = Number(localStorage.getItem("tiarRoundsWon"))
+
+if (hasWinningRow || hasWinningColumn || hasWinningDiagonals) {
+  if(turnPlayer == "x"){
+    let modifiedRoundsWon = tiarRoundsWon + 1
+    localStorage.setItem("tiarRoundsWon", modifiedRoundsWon)
+  }
   return true
-} else false
+} else {
+  return false
+}
 
 }
 
@@ -255,10 +268,13 @@ function areAllElementsEqual(arr) {
 
 // Prepare a clean command line function in order to show the final grid and the winner message
 const endGameTiar = (player) => {
-console.log(`the winner is: ${player}`)
-  console.log(`the game ends here`)
+  let endGameText = createTextLine("games-hub", `the winner is: ${player}` )
+  printInCommandLine(endGameText)
+  endGameMessage()
 }
 
 const drawGameTiarChecker = () => {
-  
+  let endGameText = createTextLine(`it'sa a draw!` )
+  printInCommandLine(endGameText)
+  endGameMessage()
 }

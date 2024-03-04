@@ -3,6 +3,7 @@
 :root {
   /* BRAND COLORS */
   --GH-light_grey: #121212;
+  --GH-light_grey-alt: #12121200;
   --GH-dark_grey: #0E0E0E;
   --GH-white: #ffffff;
   --GH-yellow: #ffe500;
@@ -38,4 +39,7 @@ h2 {
   font-weight: 300;
 }
 
-
+::selection{
+  background-color: var(--GH-light_grey);
+  color: var(--GH-light_grey-alt);
+}

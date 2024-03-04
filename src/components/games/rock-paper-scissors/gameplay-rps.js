@@ -16,7 +16,7 @@ let inGameTextLose =
 let inGameTextDraw =
   data.texts.textsGames.rockPaperScissors.inGameTexts.inGameText04;
 
-localStorage.setItem("rpsRoundsWon", 0)
+// localStorage.setItem("rpsRoundsWon", "")
 
 export const machineSideRps = () => {
   let lastInputValue = getLastInputValue();

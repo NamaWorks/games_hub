@@ -65,7 +65,7 @@ li {
 #input-main {
   width: 50svw;
   margin: var(--GH-margin-l);
-  background-color: var(--GH-dark_grey);
+  background-color: var(--GH-light_grey);
   border: 1px solid var(--GH-yellow);
   color: var(--GH-coral);
   padding: var(--GH-gap-m);
